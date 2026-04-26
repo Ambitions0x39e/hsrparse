@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "角色语音"
+version = "2.0.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fire",
+    "jinja2",
+    "pydantic>=2.0",
+    "gsz",           # provides gsz.format.Formatter / Syntax
+    "mwclient",      # wiki 读写（sync_voice.py 使用）
+    "requests",      # SMW API 查询（sync_voice.py 使用）
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src", "func", "templates"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+ignore_missing_imports = true   # gsz type stubs not available
